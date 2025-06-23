@@ -26,12 +26,15 @@ export class PdfService {
     );
   }
 
+  getPdfBlob(id: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/${id}`, {
+      responseType: 'blob'
+    });
+  }
+
   downloadPdf(id: string): void {
-    this.http
-      .get(`${this.baseUrl}/${id}`, { responseType: 'blob' })
-      .subscribe(blob => {
-        // usa file-saver para descargar
-        saveAs(blob, `${id}.pdf`);
-      });
+    this.getPdfBlob(id).subscribe(blob => {
+      saveAs(blob, `${id}.pdf`);
+    });
   }
 }
