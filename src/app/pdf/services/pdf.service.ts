@@ -11,7 +11,7 @@ export interface PdfMeta {
 
 @Injectable({ providedIn: 'root' })
 export class PdfService {
-  private baseUrl = 'http://localhost:8080/pdfs'; // URL de microservicio para PDFs
+  private baseUrl = 'http://localhost:8081/pdfs'; // URL de microservicio para PDFs
 
   constructor(private http: HttpClient) {}
 
