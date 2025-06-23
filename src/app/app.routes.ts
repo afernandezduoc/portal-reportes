@@ -6,5 +6,5 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pdf/pdf.module').then(m => m.PdfModule)
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'pdfs' }
 ];
