@@ -1,1 +1,25 @@
-<p>pdf-list works!</p>
+<div>
+  <mat-form-field>
+    <mat-label>Filtrar por fecha</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [formControl]="dateControl"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="picker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<table>
+  <tr *ngFor="let pdf of filtered">
+    <td>{{ pdf.fileName }}</td>
+    <td>
+      <button mat-button (click)="openViewer(pdf)">Ver</button>
+      <button mat-button (click)="download(pdf)">Descargar</button>
+    </td>
+  </tr>
+</table>
