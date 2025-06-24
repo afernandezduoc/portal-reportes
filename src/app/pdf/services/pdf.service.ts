@@ -37,4 +37,15 @@ export class PdfService {
       saveAs(blob, `${id}.pdf`);
     });
   }
+
+  uploadPdf(file: File): Observable<string> {
+    const form = new FormData();
+    form.append('file', file);
+    return this.http
+      .post<string>(`${this.baseUrl}/upload`, form);
+  }
+
+  deletePdf(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
 }
