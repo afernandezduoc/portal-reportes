@@ -22,17 +22,20 @@ export class PdfUploadComponent {
 
   onSubmit() {
     if (!this.selectedFile) {
-      this.errorMsg = 'Selecciona un archivo PDF.';
+      this.errorMsg = 'Selecciona un archivo.';
       return;
     }
+    if (this.selectedFile.type !== 'application/pdf') {
+      this.errorMsg = 'Solo se permiten archivos PDF.';
+      return;
+    }
+
     this.pdfService.uploadPdf(this.selectedFile)
       .subscribe({
-        next: id => {
-          // al subir correctamente, volvemos al listado
+        next: () => {
           this.router.navigate(['/pdfs']);
         },
-        error: err => {
-          console.error(err);
+        error: () => {
           this.errorMsg = 'Error al subir el PDF.';
         }
       });
