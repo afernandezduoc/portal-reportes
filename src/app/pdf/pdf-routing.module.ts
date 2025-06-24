@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { PdfListComponent } from './pdf-list/pdf-list.component';
+import { PdfUploadComponent } from './pdf-upload/pdf-upload.component';
 
 const routes: Routes = [
-  { path: '', component: PdfListComponent }
+  { path: '', component: PdfListComponent },
+  { path: 'upload', component: PdfUploadComponent },
 ];
 
 @NgModule({
