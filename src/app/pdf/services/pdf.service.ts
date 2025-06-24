@@ -41,8 +41,11 @@ export class PdfService {
   uploadPdf(file: File): Observable<string> {
     const form = new FormData();
     form.append('file', file);
-    return this.http
-      .post<string>(`${this.baseUrl}/upload`, form);
+    return this.http.post(
+      `${this.baseUrl}/upload`,
+      form,
+      { responseType: 'text' }          // ← forzamos texto, no JSON
+    );
   }
 
   deletePdf(id: string): Observable<void> {
