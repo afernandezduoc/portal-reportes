@@ -3,5 +3,3 @@
 
 <input type="file" accept="application/pdf" (change)="onFileChange($event)" />
 <button (click)="onSubmit()">Subir</button>
-<div *ngIf="uploading" class="loading">Subiendo...</div>
-<div *ngIf="uploadSuccess" class="success">Informe subido correctamente.</div>
