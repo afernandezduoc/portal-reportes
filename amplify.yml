@@ -9,7 +9,7 @@ frontend:
         - npm run build
   artifacts:
     # debe coincidir con el outputPath de tu angular.json
-    baseDirectory: dist/portal-reportes
+    baseDirectory: dist/portal-reportes/browser
     files:
       - '**/*'
   cache:
