@@ -7,11 +7,12 @@ frontend:
     build:
       commands:
         - npm run build
+        - echo "─── ESTRUCTURA de dist/portal-reportes ───"
+        - ls -R dist/portal-reportes
   artifacts:
-    # debe coincidir con el outputPath de tu angular.json
     baseDirectory: dist/portal-reportes/browser
     files:
-      - '**/*'
+      - "**/*"
   cache:
     paths:
       - .npm/**/*
