@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { saveAs } from 'file-saver';
+import { environment } from '../../../environments/environment';
 
 export interface PdfMeta {
   id: string;
@@ -11,7 +12,7 @@ export interface PdfMeta {
 
 @Injectable({ providedIn: 'root' })
 export class PdfService {
-  private baseUrl = 'http://localhost:8081/pdfs'; // URL de microservicio para PDFs
+  private baseUrl = `${environment.apiUrl}/pdfs`; // URL de microservicio para PDFs
 
   constructor(private http: HttpClient) {}
 
