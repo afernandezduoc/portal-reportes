@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+  <mat-icon>hexagon</mat-icon>
+  <span style="margin-left:8px">MiEmpresa</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/login">
+    <mat-icon>login</mat-icon>
+    Login
+  </button>
+</mat-toolbar>
+
+<div class="hero-container">
+  <div class="hero-overlay">
+    <h1>Soluciones Innovadoras para tu Negocio</h1>
+    <p>Potenciamos el crecimiento de tu empresa con tecnología de vanguardia.</p>
+    <button mat-raised-button color="accent" routerLink="/pdfs">
+      Ver mis reportes
+    </button>
+  </div>
+</div>
+
+<section class="services-section">
+  <h2>Nuestros Servicios</h2>
+  <mat-grid-list cols="3" rowHeight="1:1" gutterSize="16px">
+    <mat-grid-tile *ngFor="let s of servicios">
+      <mat-card class="service-card">
+        <mat-card-header>
+          <mat-icon>{{ s.icon }}</mat-icon>
+          <mat-card-title>{{ s.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>{{ s.desc }}</mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</section>
+
+<mat-toolbar color="primary" class="footer">
+  © 2025 MiEmpresa. Todos los derechos reservados.
+</mat-toolbar>
