@@ -17,6 +17,9 @@ import { MatToolbarModule }        from '@angular/material/toolbar';
 import { MatSidenavModule }        from '@angular/material/sidenav';
 import { MatListModule }           from '@angular/material/list';
 import { MatIconModule }           from '@angular/material/icon';
+import { MatGridListModule }      from '@angular/material/grid-list';
+import { MatCardModule }          from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [PdfListComponent, PdfViewerComponent],
@@ -33,7 +36,10 @@ import { MatIconModule }           from '@angular/material/icon';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule,
+    MatCardModule,
+    MatFormFieldModule
   ]
 })
 export class PdfModule { }

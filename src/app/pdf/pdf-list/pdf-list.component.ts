@@ -1,3 +1,4 @@
+// src/app/pdf/pdf-list/pdf-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PdfService, PdfMeta } from '../services/pdf.service';
@@ -20,11 +21,11 @@ export class PdfListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pdfService.listPdfs().subscribe(list => {
-      this.pdfs = list;
-      this.filtered = list;
-    });
-
+  this.pdfService.listPdfs().subscribe(list => {
+    console.log('PDFs recibidos:', list);
+    this.pdfs     = list;
+    this.filtered = list;
+  });
     this.dateControl.valueChanges.subscribe(d => this.applyFilter(d));
   }
 
@@ -32,10 +33,8 @@ export class PdfListComponent implements OnInit {
     if (!date) {
       this.filtered = this.pdfs;
     } else {
-      const fecha = date.toISOString().split('T')[0]; 
-      this.filtered = this.pdfs.filter(p =>
-        p.fileName.includes(fecha)
-      );
+      const fecha = date.toISOString().split('T')[0];
+      this.filtered = this.pdfs.filter(p => p.fileName.includes(fecha));
     }
   }
 

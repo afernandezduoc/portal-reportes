@@ -1,25 +1,64 @@
-<div>
-  <mat-form-field>
-    <mat-label>Filtrar por fecha</mat-label>
-    <input
-      matInput
-      [matDatepicker]="picker"
-      [formControl]="dateControl"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="picker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div>
+<mat-toolbar color="accent">
+  <mat-icon>folder_shared</mat-icon>
+  <span style="margin-left: 8px">Área Privada</span>
+</mat-toolbar>
 
-<table>
-  <tr *ngFor="let pdf of filtered">
-    <td>{{ pdf.fileName }}</td>
-    <td>
-      <button mat-button (click)="openViewer(pdf)">Ver</button>
-      <button mat-button (click)="download(pdf)">Descargar</button>
-    </td>
-  </tr>
-</table>
+<div class="pdf-container" style="display: flex; gap: 16px; padding: 16px;">
+  <!-- 1) Tarjeta de filtro -->
+  <aside style="flex: 1 1 250px; max-width: 300px;">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Filtrar por Fecha</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="fill" style="width:100%">
+          <mat-label>Seleccionar fecha</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [formControl]="dateControl"
+            readonly
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-stroked-button color="primary" style="margin-top: 8px;" (click)="applyFilter(null)">
+          <mat-icon>calendar_today</mat-icon>
+          Mostrar todos
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </aside>
+
+  <!-- 2) Listado de PDFs -->
+  <section style="flex: 3 1 0; display: flex; flex-direction: column; gap: 16px;">
+    <ng-container *ngIf="filtered.length; else noDocs">
+      <div
+        class="pdf-grid"
+        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px;"
+      >
+        <mat-card class="pdf-card" *ngFor="let pdf of filtered">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>picture_as_pdf</mat-icon>
+            <mat-card-title>{{ pdf.fileName }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-actions align="end">
+            <button mat-stroked-button color="primary" (click)="openViewer(pdf)">
+              <mat-icon>visibility</mat-icon> Ver
+            </button>
+            <button mat-stroked-button color="accent" (click)="download(pdf)">
+              <mat-icon>download</mat-icon> Descargar
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+
+    <ng-template #noDocs>
+      <div class="no-docs" style="text-align:center; margin-top:48px;">
+        <mat-icon style="font-size:48px; color:rgba(0,0,0,0.3)">folder_off</mat-icon>
+        <p>No se encontraron documentos.</p>
+      </div>
+    </ng-template>
+  </section>
+</div>

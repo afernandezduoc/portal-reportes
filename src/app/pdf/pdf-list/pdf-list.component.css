@@ -1,0 +1,27 @@
+/* src/app/pdf/pdf-list/pdf-list.component.css */
+.pdf-container {
+  padding: 16px;
+}
+
+.pdf-card-grid {
+  /* opcional: scroll interno si hay muchas cards */
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.pdf-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.no-docs {
+  text-align: center;
+  padding: 48px 0;
+  color: rgba(0,0,0,0.54);
+}
+
+.no-docs mat-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
