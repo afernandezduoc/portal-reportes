@@ -13,6 +13,7 @@ import { AppAuthModule }        from './app/auth/auth.module';
 bootstrapApplication(AppComponent, {
   providers: [
     provideAnimations(),
+    provideRouter(routes),
     importProvidersFrom(
       HttpClientModule,
       AppAuthModule,
@@ -28,8 +29,7 @@ bootstrapApplication(AppComponent, {
           useRefreshToken:      environment.oidc.useRefreshToken
         }
       })
-    ),
-    provideRouter(routes)
+    )    
   ]
 })
 .catch(err => console.error(err));

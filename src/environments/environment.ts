@@ -4,11 +4,11 @@ export const environment = {
   oidc: {
     authority:           'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_4EmBPrDK0',
     clientId:            '20gb5raf2etl8md7ls4hnnmb5n',
-    redirectUrl:         window.location.origin,
-    postLogoutRedirectUrl: window.location.origin,
-    scope:               'openid profile email',
+    redirectUrl:         'http://localhost:4200/auth-callback',
+    postLogoutRedirectUrl: 'http://localhost:4200/',
+    scope:               'email openid phone',
     responseType:        'code',
-    silentRenew:         true,
-    useRefreshToken:     true
+    silentRenew:         false,
+    useRefreshToken:     false
   }
 };
