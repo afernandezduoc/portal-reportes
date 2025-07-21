@@ -1,1 +1,43 @@
-<p>admin-dashboard works!</p>
+<!-- src/app/admin/admin-dashboard/admin-dashboard.component.html -->
+<mat-card class="mb-4">
+  <mat-card-title>Subir Nuevo Documento</mat-card-title>
+  <mat-card-content [formGroup]="uploadForm">
+    <input type="file" hidden #fileInput (change)="onFileSelected($event)" />
+    <button mat-stroked-button (click)="fileInput.click()">Examinar…</button>
+    <span *ngIf="uploadForm.value.file">{{ uploadForm.value.file.name }}</span>
+    <div class="text-right mt-3">
+      <button mat-flat-button color="primary"
+              (click)="submit()"
+              [disabled]="uploadForm.invalid">
+        <mat-icon>upload</mat-icon>
+        Subir
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Gestionar Documentos</mat-card-title>
+  <mat-card-content>
+    <table mat-table [dataSource]="pdfs" class="w-100">
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef>Archivo</th>
+        <td mat-cell *matCellDef="let p">{{ p.fileName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let p" class="text-right">
+          <button mat-icon-button color="warn" (click)="delete(p)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['fileName','actions']"></tr>
+      <tr mat-row        *matRowDef="let r; columns:['fileName','actions']"></tr>
+    </table>
+    <p *ngIf="!pdfs.length" class="text-center text-gray-500 mt-4">
+      No hay documentos.
+    </p>
+  </mat-card-content>
+</mat-card>

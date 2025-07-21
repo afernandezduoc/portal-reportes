@@ -1,9 +1,9 @@
 // src/app/pdf/pdf-list/pdf-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl }       from '@angular/forms';
+import { MatDialog }         from '@angular/material/dialog';
 import { PdfService, PdfMeta } from '../services/pdf.service';
-import { MatDialog } from '@angular/material/dialog';
-import { PdfViewerComponent } from '../pdf-viewer/pdf-viewer.component';
+import { PdfViewerComponent }  from '../pdf-viewer/pdf-viewer.component';
 
 @Component({
   selector: 'app-pdf-list',
@@ -11,38 +11,41 @@ import { PdfViewerComponent } from '../pdf-viewer/pdf-viewer.component';
   styleUrls: ['./pdf-list.component.css']
 })
 export class PdfListComponent implements OnInit {
-  pdfs: PdfMeta[] = [];
+  pdfs: PdfMeta[]     = [];
   filtered: PdfMeta[] = [];
-  dateControl = new FormControl<Date | null>(null);
+  dateControl = new FormControl<Date|null>(null);
 
   constructor(
     private pdfService: PdfService,
-    private dialog: MatDialog
+    private dialog:     MatDialog
   ) {}
 
-  ngOnInit(): void {
-  this.pdfService.listPdfs().subscribe(list => {
-    console.log('PDFs recibidos:', list);
-    this.pdfs     = list;
-    this.filtered = list;
-  });
+  ngOnInit() {
+    this.pdfService.listPdfs().subscribe(list => {
+      this.pdfs     = list;
+      this.filtered = list;
+    });
     this.dateControl.valueChanges.subscribe(d => this.applyFilter(d));
   }
 
-  applyFilter(date: Date | null) {
+  applyFilter(date: Date|null) {
     if (!date) {
       this.filtered = this.pdfs;
     } else {
-      const fecha = date.toISOString().split('T')[0];
-      this.filtered = this.pdfs.filter(p => p.fileName.includes(fecha));
+      const iso = date.toISOString().slice(0,10);
+      // como no hay campo `date`, filtramos por el nombre
+      this.filtered = this.pdfs.filter(p => p.fileName.includes(iso));
     }
   }
 
   openViewer(pdf: PdfMeta) {
     this.dialog.open(PdfViewerComponent, {
-      data: { id: pdf.id, fileName: pdf.fileName },
-      width: '80vw',
-      height: '80vh'
+      width:  '80vw',
+      height: '80vh',
+      data: {
+        id:       pdf.id,
+        fileName: pdf.fileName
+      }
     });
   }
 
